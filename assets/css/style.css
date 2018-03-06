@@ -1,0 +1,62 @@
+#title-bar {
+    background-color: #097F21;
+    height: 60px;
+}
+
+#title {
+    color: #FFFFFF;
+}
+
+#player, #status {
+    height: 75px;
+}
+
+#player1Card, #player2Card, #resultsCard {
+    width: 250px;
+    height: 250px;
+    background-color: #140B7B;
+    color: #FFFFFF;
+}
+
+.rpsText {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    background-color: #8E0804;  
+    border-radius: 0; 
+    height: 55px;
+}
+
+.ps {
+    border-top: 1px solid #140B7B;
+}
+
+#p1WL, #p2WL {
+    background-color: #140B7B;
+    color: #FFFFFF;
+    height: 30px;
+    margin-bottom: 0;
+}
+
+#p1Display, #p2Display {
+    height: 170px;
+}
+
+.rpsText:hover {
+    border: 1px solid #140B7B;
+}
+
+.userName {
+    font-weight: bold;
+    height: 45px;
+}
+
+#messageText {
+    height: 125px;
+    border: 1px solid #140B7B;
+    overflow-y: auto;
+}
+
+#messageInput, #userNameInput {
+    border: 1px solid #8E0804;
+}

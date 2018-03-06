@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--link to custom stylesheet-->
+    <link rel="stylesheet" typ ="text/css" href="assets/css/style.css">
+
+     <!-- Added link to the jQuery Library -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Rock-Paper-Scissors</title>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center align-items-center" id="title-bar">
+                <h1 id="title">Rock Paper Scissors</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4"></div>
+
+            <div class="col-sm-4 d-flex justify-content-center align-items-center" id="player">
+                <div class="input-group mt-4" id="addPlayer">
+                    <input type="text" class="form-control" id="userNameInput" placeholder="Name" aria-label="Users First Name">
+                    <button type="submit" class="btn btn:hover ml-1" id="start" value="Start">Start</button>
+                </div>
+            </div>
+
+            <div class="col-sm-4"></div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                <h5 id="userName"></h5>
+            </div>
+                
+            <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                <h5 id="gameStatus"></h5>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="card text-center mt-1 mb-2" id="player1Card">
+                        <div class="card-header p-0">
+                            <h5 class="card-header userName w-100" id="player1">Waiting for Player 1</h5>
+                        </div>
+                        <div class="card-body p-0" id="p1Display">
+                            <div id="player1Choice"></div>
+                        </div>
+                        <div class="card-footer p-0">
+                            <p class="w-100" id="p1WL"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="card align-items-centermt-1 mb-2" id="resultsCard"></div>
+                </div>
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="card text-center mt-1 mb-2" id="player2Card">
+                        <div class="card-header p-0">
+                            <h5 class="card-header userName w-100" id="player2">Waiting for Player 2</h5>
+                        </div>
+                        <div class="card-body p-0" id="p2Display">
+                            <div id="player2Choice"></div>
+                        </div>
+                        <div class="card-footer p-0">
+                            <p class="w-100" id="p2WL"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 d-flex">
+                <div id="messageText" class="mt-4 w-100"></div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 d-flex">
+                <div class="input-group mt-2 justify-content-left">
+                    <input type="text" class="form-control" id="messageInput" aria-label="Text Message Input Box">
+                    <button type="submit" class="btn btn:hover ml-1" id="send" value="Send">Send</button>
+                </div>
+
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+    </div>
+
+    <!-- link to firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+
+    <!--link to javascript file-->
+    <script src="assets/javascript/game.js"></script>
+</body>
+</html>
