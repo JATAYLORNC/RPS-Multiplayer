@@ -22,7 +22,7 @@
     font-weight: 700;
     font-size: 1.25rem;
     color: #FFFFFF;
-    background-color: #8E0804;  
+    background-color: #097F21;  
     border-radius: 0; 
     height: 55px;
 }
@@ -59,4 +59,9 @@
 
 #messageInput, #userNameInput {
     border: 1px solid #8E0804;
+}
+
+.message {
+    margin: 0 1rem;
+
 }

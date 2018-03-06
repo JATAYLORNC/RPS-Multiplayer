@@ -37,7 +37,7 @@ $("#start").on("click", function(event) {
     //grab the value from "userNameInput" and assign it to a new variable
     userName = $("#userNameInput").val().trim();
 
-    $("#userNameInput").val("");
+    $("#row1").remove();
 
     playersRef.once("value").then(function(snapshot) {
 
@@ -98,30 +98,62 @@ database.ref("/players/turn").on("value", function(snapshot){
 
     if(snapshot.val()=="1") {
 
+        $("#resultsCard").empty();
+
+        $("#player1Choice").empty();
+
+        $("#player2Choice").empty();
+
         //change border to indicate it's player 1's turn
-        $("#player1Choice").css("border", "2px solid yellow");
-        $("#player2Choice").css("border", "none");
+        $("#player1Card").css("border", "4px solid yellow");
+        $("#player2Card").css("border", "none");
 
         //display rps buttons for player 1
         if(playerNumber=="1") {
             $("#player1Choice").append("<button type='button' class='btn btn:hover btn-block rpsText mb-0' value='Rock'>Rock</button>" +
             "<button type='button' class='btn btn:hover btn-block mt-0 rpsText ps mb-0' value='Paper'>Paper</button>" + 
             "<button type='button' class='btn btn:hover btn-block mt-0 rpsText ps mb-0' value='Scissors'>Scissors</button>");
+
+            $("#gameStatus").text("It's Your Turn!");
         }
+
+        database.ref("/players/1/name").once("value").then(function(snapshot) {
+            var player1Name = snapshot.val();
+
+            if(playerNumber=="2") {
+                $("#gameStatus").text("Waiting for " + player1Name + " to choose.");
+            }
+
+        });
+
+        
+
     }
 
     if(snapshot.val()=="2") {
 
         //change border to indicate it's player 2's turn
-        $("#player2Choice").css("border", "2px solid yellow");
-        $("#player1Choice").css("border", "none");
+        $("#player2Card").css("border", "4px solid yellow");
+        $("#player1Card").css("border", "none");
 
         //display rps buttons for player 21
         if(playerNumber=="2") {
             $("#player2Choice").append("<button type='button' class='btn btn:hover btn-block rpsText mb-0' value='Rock'>Rock</button>" +
             "<button type='button' class='btn btn:hover btn-block mt-0 rpsText ps mb-0' value='Paper'>Paper</button>" + 
             "<button type='button' class='btn btn:hover btn-block mt-0 rpsText ps mb-0' value='Scissors'>Scissors</button>");
+
+            $("#gameStatus").text("It's Your Turn!");
         }
+
+        database.ref("/players/2/name").once("value").then(function(snapshot) {
+            var player2Name = snapshot.val();
+
+            if(playerNumber=="1") {
+                $("#gameStatus").text("Waiting fo " + player2Name + " to choose.");
+            }
+
+        });
+
     }
 });
 
@@ -140,11 +172,33 @@ playersRef.on("child_added", function(snapshot) {
 //listen for player removed and clear player information from display
 playersRef.on("child_removed", function(snapshot) {
 
-    $("#player" + snapshot.key).text("Waiting for Player " + snapshot.key);
+    var playersName = snapshot.child("name").val();
 
-    $("#p" + snapshot.key + "WL").text("");
+    if (playersName != null) {
+
+    $("#messageText").append("<p class='message'>" + playersName + " has disconnected.</p>");
+
+    }
 
     database.ref("/players/turn").remove();
+
+    var playerKey = snapshot.key;
+
+    if (playerKey == "1") {
+        player1Exists == false;
+    } 
+    
+    if (playerKey == "2") {
+        player2Exists == false;
+    } 
+
+    if (playerKey == "1" || playerKey == "2");
+
+        $("#player" + playerKey).text("Waiting for player " + playerKey);
+
+        $("#p" + playerKey + "WL").text("");
+
+        $("#player" + playerKey + "Choice").css("border", "none");
 
 });
 
@@ -152,45 +206,116 @@ database.ref("/players/2").on("child_added", function(snapshot) {
 
     if (snapshot.key == "choice") {
 
-        var myplayerData = retrievePlayerData();
-        console.log(myplayerData);
+        displayResults = function(myplayerData) {
 
-        var player1Choice = myplayerData[1];
-        var player2Choice = myplayerData[4];
+            var player1Choice = myplayerData.player1Choice;
+            var player2Choice = myplayerData.player2Choice;
+            var player1Name = myplayerData.player1Name;
+            var player2Name = myplayerData.player2Name;
+            var player1Wins = myplayerData.player1Wins;
+            var player2Wins = myplayerData.player2Wins;
+            var player1Losses = myplayerData.player1Losses;
+            var player2Losses = myplayerData.player2Losses;
 
-        console.log(player1Choice);
-        console.log(player2Choice);
+            //remove rps buttons for player 1
+            $("#player1Choice").empty();
+    
+            //display image of choice
+            $("#player1Choice").append("<img src='assets/images/" + player1Choice + ".png' alt='" + player1Choice + "'>");
 
-        function retrievePlayerData() {
+            //remove rps buttons for player 1
+            $("#player2Choice").empty();
+    
+            //display image of choice
+            $("#player2Choice").append("<img src='assets/images/" + player2Choice + ".png' alt='" + player2Choice + "'>");
 
-        playersRef.once("value").then(function(snapshot) {
+            if ((player1Choice === "Rock") && (player2Choice === "Scissors")) {
 
-            var player1Choice = snapshot.child("1").child("/choice").val();
-            var player1Name = snapshot.child("1").child("/name").val();
-            var player1Wins = snapshot.child("1").child("/wins").val();
-            var player1Losses = snapshot.child("1").child("/losses").val();
-            var player2Choice = snapshot.child("2").child("/choice").val();
-            var player2Name = snapshot.child("2").child("/name").val();
-            var player2Wins = snapshot.child("1").child("/wins").val();
-            var player2Losses = snapshot.child("1").child("/losses").val();
+                player1Wins++;
+                player2Losses++;
+                playersRef.child("1/wins").set(player1Wins);
+                playersRef.child("2/losses").set(player2Losses);
+                $("#resultsCard").append("<h1>" + player1Name + "</h1><h1>Wins!</h1>");
 
-            var playerData={"player1Choice": player1Choice, "player1Name": player1Name, "player1Wins": player1Wins, "player1Losses": player1Losses, "player2Choice": player2Choice, "player2Name": player2Name, "player2Wins": player2Wins, "player2Losses": player2Losses};
-            console.log(playerData);
-            return playerData;
-        });
+            } else if ((player1Choice === "Rock") && (player2Choice === "Paper")) {
+
+                player1Losses++;
+                player2Wins++;
+                playersRef.child("1/losses").set(player1Losses);
+                playersRef.child("2/wins").set(player2Wins);
+                $("#resultsCard").append("<h1>" + player2Name + "</h1><h1>Wins!</h1>");
+
+            } else if ((player1Choice === "Scissors") && (player2Choice === "Rock")) {
+
+                player1Losses++;
+                player2Wins++;
+                playersRef.child("1/losses").set(player1Losses);
+                playersRef.child("2/wins").set(player2Wins);
+                $("#resultsCard").append("<h1>" + player2Name + "</h1><h1>Wins!</h1>");
+
+            } else if ((player1Choice === "Scissors") && (player2Choice === "Paper")) {
+                
+                player1Wins++;
+                player2Losses++;
+                playersRef.child("1/wins").set(player1Wins);
+                playersRef.child("2/losses").set(player2Losses);
+                $("#resultsCard").append("<h1>" + player1Name + "</h1><h1>Wins!</h1>");
+
+            } else if ((player1Choice === "Paper") && (player2Choice === "Rock")) {
+
+                player1Wins++;
+                player2Losses++;
+                playersRef.child("1/wins").set(player1Wins);
+                playersRef.child("2/losses").set(player2Losses);
+                $("#resultsCard").append("<h1>" + player1Name + "</h1><h1>Wins!</h1>");
+
+            } else if ((player1Choice === "Paper") && (player2Choice === "Scissors")) {
+
+                player1Losses++;
+                player2Wins++;
+                playersRef.child("1/losses").set(player1Losses);
+                playersRef.child("2/wins").set(player2Wins);
+                $("#resultsCard").append("<h1>" + player2Name + "</h1><h1>Wins!</h1>");
+
+            } else if (player1Choice == player2Choice) {
+                $("#resultsCard").append("<h1>Tie Game!</h1>");
+            }
+
+            $("#p1WL").text("wins: " + player1Wins + "  losses: " + player1Losses);
+            $("#p2WL").text("wins: " + player2Wins + "  losses: " + player2Losses);
+
+            setTimeout(function() {
+                playersRef.child("turn").set("1");
+                database.ref("/players/1/choice").remove();
+                database.ref("/players/2/choice").remove();
+            }, 5000);
+        }
+                
+
+                retrievePlayerData(displayResults);
+
     }
 
         
+        function retrievePlayerData(displayResults) {
+
+            playersRef.once("value").then(function(snapshot) {
+
+                var player1Choice = snapshot.child("1").child("/choice").val();
+                var player1Name = snapshot.child("1").child("/name").val();
+                var player1Wins = snapshot.child("1").child("/wins").val();
+                var player1Losses = snapshot.child("1").child("/losses").val();
+                var player2Choice = snapshot.child("2").child("/choice").val();
+                var player2Name = snapshot.child("2").child("/name").val();
+                var player2Wins = snapshot.child("2").child("/wins").val();
+                var player2Losses = snapshot.child("2").child("/losses").val();
+
+                var playerData={"player1Choice": player1Choice, "player1Name": player1Name, "player1Wins": player1Wins, "player1Losses": player1Losses, "player2Choice": player2Choice, "player2Name": player2Name, "player2Wins": player2Wins, "player2Losses": player2Losses};
+
+                displayResults(playerData);
+            });    
     }
 }); 
-
-
-
-
-
-
-
-
 
 //function to add a player to the game
 function addPlayer() {
@@ -292,95 +417,11 @@ function monitorConnections() {
 
             database.ref("/players/turn").onDisconnect().remove();
 
+            messageRef.onDisconnect().remove();
+
         }
     });
 }
-
-
-function displayResults() {
-
-    playersRef.once("value").then(function(snapshot) {
-
-        var player1Choice = snapshot.child("1").child("/choice").val();
-        var player1Name = snapshot.child("1").child("/name").val();
-        var player1Wins = snapshot.child("1").child("/wins").val();
-        var player1Losses = snapshot.child("1").child("/losses").val();
-        var player2Choice = snapshot.child("2").child("/choice").val();
-        var player1Name = snapshot.child("2").child("/name").val();
-        var player2Wins = snapshot.child("1").child("/wins").val();
-        var player2Losses = snapshot.child("1").child("/losses").val();
-  
-        determineWinner();
-
-        //display player1Choice and player2Choice for visibility to both players
-        $("#player1Choice").append("<img src='assets/images/" + player1Choice + ".png' alt='" + Player1Choice + "'>");
-        $("#player2Choice").append("<img src='assets/images/" + player2Choice + ".png' alt='" + Player2Choice + "'>");
-
-        if ((player1Choice === "Rock") && (player2Choice === "Scissors")) {
-
-            console.log(player1Choice);
-            console.log(player2Choice);
-            player1Wins++;
-            player2Losses++;
-            playersRef.child("1/wins").set(player1Wins);
-            playersRef.child("2/losses").set(player2losses);
-            $("#resultsCard").append("<h4>"+ player1Name + "Wins!</h4>");
-
-        } else if ((player1Choice === "Rock") && (player2Choice === "Paper")) {
-
-            player1Losses++;
-            player2Wins++;
-            playersRef.child("1/losses").set(player1losses);
-            playersRef.child("2/wins").set(player2Wins);
-            $("#resultsCard").append("<h4>"+ player2Name + "Wins!</h4>");
-
-        } else if ((player1Choice === "Scissors") && (player2Choice === "Rock")) {
-
-            player1Losses++;
-            player2Wins++;
-            playersRef.child("1/losses").set(player1losses);
-            playersRef.child("2/wins").set(player2Wins);
-            $("#resultsCard").append("<h4>"+ player2Name + "Wins!</h4>");
-
-        } else if ((player1Choice === "Scissors") && (player2Choices === "Paper")) {
-            
-            player1Wins++;
-            player2Losses++;
-            playersRef.child("1/wins").set(player1Wins);
-            playersRef.child("2/losses").set(player2losses);
-            $("#resultsCard").append("<h4>"+ player1Name + "Wins!</h4>");
-
-        } else if ((player1Choice === "Paper") && (player2Choice === "Rock")) {
-
-            player1Wins++;
-            player2Losses++;
-            playersRef.child("1/wins").set(player1Wins);
-            playersRef.child("2/losses").set(player2losses);
-            $("#resultsCard").append("<h4>"+ player1Name + "Wins!</h4>");
-
-        } else if ((player1Choice === "Paper") && (player2Choice === "Scissors")) {
-
-            player1Losses++;
-            player2Wins++;
-            playersRef.child("1/losses").set(player1losses);
-            playersRef.child("2/wins").set(player2Wins);
-            $("#resultsCard").append("<h4>"+ player2Name + "Wins!</h4>");
-
-        } else if (player1Choice === player2Choice) {
-            $("#resultsCard").append("<h4>Tie Game!</h4>");
-        }
-
-        $("#p1WL").text("wins: " + player1Wins + "  losses: " + player1Losses);
-        $("#p2WL").text("wins: " + player2Wins + "  losses: " + player2Losses);
-
-    });
-
-    // setTimeout(function() {
-    //     playersRef.child("turn").set("1");
-    // }, 10000);
-
-}
-
 
 //message function
 //listen for click on "#send" button
@@ -389,10 +430,11 @@ $("#send").on("click", function() {
     //grab text from messageInput box and assign it to a variable
     var message = $("#messageInput").val().trim();
 
+    //clear message from input box
+    $("#messageInput").val("");
+
     //store message in firebase
     messageRef.push(userName + ": " + message);
-
-    
 
 });
 
@@ -403,5 +445,6 @@ messageRef.on("child_added", function(snapshot) {
     var message = snapshot.val();
 
     //append message to "#messageText"
-    $("#messageText").append("<p>" + message + "</p>");
+    $("#messageText").append("<p class='message'>" + message + "</p>");
+
 });
