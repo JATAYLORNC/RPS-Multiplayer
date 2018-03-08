@@ -18,39 +18,30 @@
 </head>
 <body>
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-center align-items-center" id="title-bar">
                 <h1 id="title">Rock Paper Scissors</h1>
             </div>
         </div>
-
         <div class="row" id = "row1">
             <div class="col-sm-4"></div>
-
-            <div class="col-sm-4 d-flex justify-content-center align-items-center" id="player">
-                <div class="input-group mt-4" id="addPlayer">
-                    <input type="text" class="form-control" id="userNameInput" placeholder="Name" aria-label="Users First Name">
-                    <button type="submit" class="btn btn:hover ml-1" id="start" value="Start">Start</button>
+                <div class="col-sm-4 d-flex justify-content-center align-items-center" id="player">
+                    <form class="input-group mt-4" id="addPlayer">
+                        <input type="text" class="form-control" id="userNameInput" placeholder="Name" aria-label="Users First Name">
+                        <button type="submit" class="btn btn:hover ml-1" id="start" value="Start">Start</button>
+                    </form>
                 </div>
-            </div>
-
             <div class="col-sm-4"></div>
-
         </div>
-
         <div class="row">
 
             <div class="col-sm-12 d-flex justify-content-center align-items-center">
                 <h5 class="mt-4" id="userName"></h5>
-            </div>
-                
+            </div>   
             <div class="col-sm-12 d-flex justify-content-center align-items-center">
                 <h5 class="mt-2 mb-4" id="gameStatus"></h5>
             </div>
-
         </div>
-
         <div class="row">
 
 
@@ -67,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 d-flex">
+                <div class="col-sm-4 d-flex justify-content-center">
                     <div class="card align-items-center justify-content-center mt-1 mb-2" id="resultsCard"></div>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-center">
@@ -83,11 +74,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
         </div>
         <div class="row">
             <div class="col-sm-2"></div>
@@ -99,15 +85,13 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8 d-flex">
-                <div class="input-group mt-2 justify-content-left">
+                <form class="input-group mt-2 justify-content-left">
                     <input type="text" class="form-control" id="messageInput" aria-label="Text Message Input Box">
                     <button type="submit" class="btn btn:hover ml-1" id="send" value="Send">Send</button>
-                </div>
-
+                </form>
             </div>
             <div class="col-sm-2"></div>
         </div>
-
     </div>
 
     <!-- link to firebase -->
