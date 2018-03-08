@@ -39,6 +39,14 @@ $("#start").on("click", function(event) {
 
     $("#row1").remove();
 
+    newRow = $("<div class='row'>");
+
+    $(newRow).append("<div class='col-sm-12 d-flex justify-content-center align-items-center'><h5 class='mt-4' id='userName'></h5>" +
+    "</div><div class='col-sm-12 d-flex justify-content-center align-items-center'><h5 class='mt-2 mb-4' id='gameStatus'></h5>" +
+    "</div>");
+
+    $("#gameComs").append(newRow);
+
     playersRef.once("value").then(function(snapshot) {
 
         //check for existance of player 1 and player 2
@@ -69,7 +77,7 @@ $(document).on("click", ".rpsText", function() {
                 $("#player1Choice").empty();
     
                 //display image of choice
-                $("#player1Choice").append("<img src='assets/images/" + choice + ".png' alt='" + choice + "'>");
+                $("#player1Choice").append("<img src='assets/images/" + choice + ".png' class='rpsImage' alt='" + choice + "'>");
 
             }
         
@@ -169,6 +177,15 @@ playersRef.on("child_added", function(snapshot) {
 playersRef.on("child_removed", function(snapshot) {
 
     var playersName = snapshot.child("name").val();
+
+    //remove borders indicating whose turn it is
+    $("#player1Card").css("border", "none");
+    $("#player2Card").css("border", "none");
+
+    //remove rps selection buttons
+    $("#player1Choice").empty();
+    $("#player2Choice").empty();
+    
 
     if (playersName != null) {
 
@@ -288,19 +305,6 @@ function monitorConnections() {
 
         // If they are connected..
         if (snap.val()) {
-    
-            // Add user to the connections list.
-            var con = connectionsRef.push();
-
-            con.set({
-                connected: "true",
-                name: userName,
-                player: playerNumber
-            
-            });
-
-            // Remove user from the connection list when they disconnect.
-            con.onDisconnect().remove();
         
             database.ref("/players/" + playerNumber).onDisconnect().remove();
 
@@ -346,13 +350,13 @@ displayResults = function(myplayerData) {
     $("#player1Choice").empty();
 
     //display image of choice
-    $("#player1Choice").append("<img src='assets/images/" + player1Choice + ".png' alt='" + player1Choice + "'>");
+    $("#player1Choice").append("<img src='assets/images/" + player1Choice + ".png' class='rpsImage' alt='" + player1Choice + "'>");
 
     //remove rps buttons for player 1
     $("#player2Choice").empty();
 
     //display image of choice
-    $("#player2Choice").append("<img src='assets/images/" + player2Choice + ".png' alt='" + player2Choice + "'>");
+    $("#player2Choice").append("<img src='assets/images/" + player2Choice + ".png' class='rpsImage' alt='" + player2Choice + "'>");
 
     if ((player1Choice === "Rock") && (player2Choice === "Scissors")) {
 
@@ -430,23 +434,33 @@ $("#send").on("click", function() {
     $("#messageInput").val("");
 
     //store message in firebase
-    messageRef.push(userName + ": " + message);
-    
+    var newMessage = messageRef.push({
+        "playerNumber": playerNumber,
+        "message": message
+    });
 });
 
 //listen for a child added to message  
 messageRef.on("child_added", function(snapshot) {
     
     //assign the value of the added child to a variable
-    var message = snapshot.val();
+    var message = snapshot.val().message;
 
-    playersRef.once("value").then(function(snapshot) {
+    var player = snapshot.val().playerNumber;
 
-        //call function to add player to the game
-        addPlayer();
-    });
+    console.log(message);
 
-    //append message to "#messageText"
-    $("#messageText").append("<p class='message'>" + message + "</p>");
+    if (player == "1") {
+
+        //append message to "#messageText"
+        $("#messageText").append("<p class='message1'>" + message + "</p>");
+
+    } else if (player == "2") {
+
+        //append message to "#messageText"
+        $("#messageText").append("<p class='message2'>" + message + "</p>");
+    }
+
+    
 
 });

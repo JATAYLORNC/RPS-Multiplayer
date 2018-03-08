@@ -8,14 +8,20 @@
 }
 
 #player, #status {
-    height: 75px;
+    height: 100px;
 }
 
 #player1Card, #player2Card, #resultsCard {
-    width: 250px;
-    height: 250px;
+    max-width: 250px;
+    max-height: 250px;
+    width: 58%;
     background-color: #140B7B;
     color: #FFFFFF;
+}
+
+.rpsImage {
+    width: 100%;
+    height: auto;
 }
 
 .rpsText {
@@ -61,7 +67,66 @@
     border: 1px solid #8E0804;
 }
 
-.message {
+.message1 {
     margin: 0 1rem;
-
+    color: #140B7B;
 }
+
+.message2 {
+    margin: 0 1rem;
+    color: #8E0804;
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+
+    #title-bar {
+        height: 48px;
+    }
+
+    #title {
+        font-size: 2rem;
+    }
+    
+    #player1Card, #player2Card, #resultsCard {
+        max-height: 166px;
+    }
+
+    .rpsText {
+        font-size: 1rem;
+        height: 33px;
+    }
+
+    #p1WL, #p2WL {
+        font-size: 0.5rem;
+        height: 20px;
+    }
+
+    .userName {
+        font-size: 0.85rem;
+        height: 36px;
+    }
+    
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+    #player1Card, #player2Card, #resultsCard {
+        max-height: 196px;
+    }
+
+    .rpsText {
+        font-size: 0.75rem;
+        height: 43px;
+    }
+
+    #p1WL, #p2WL {
+        font-size: 0.75rem;
+        height: 25px;
+    }
+
+    .userName {
+        font-size: 1rem;
+        height: 40px;
+    
+}
+

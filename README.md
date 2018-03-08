@@ -1,1 +1,9 @@
-# RPS-Multiplayer
+# Rock/Paper/Scissors-Multiplayer
+Rock/Paper/Scissors is a web based multi-player version of the classic game.  Upon loading the page, each of the 2 player cards will either indicate the name of the other player(s) or indicate that another player is being waited for.  Users enter there name in the input box and click on the start button in order to join the game as one of the players.  The game will then indicate to the user which player they are.  If there are already 2 players the game will indicate to the user to try again later.
+
+Once there are 2 players, the game will indicate that it is the first players turn and Rock, Paper, Scissors selection buttons will appear only for that player.  Once the first player takes their turn the buttons will be replaced by an image of the choice they made and it will become the second player's turn.  The game status message will indicate that it is the 2nd player's turn and selection buttons will appear for player 2. After player 2 has made a selection, the display will update so that both players can see what they chose and what the other player chose.  The results card will indicate who won.  The win/loss record will update at the bottom of each player card and the game will reset for another round of play.
+
+A messaging feature is also included with this game so players can communicate with one another or taunt each other while playing the game.
+
+#About
+Rock/Paper/Scissors is coded in Javascript along with jQuery commands to add and remove game-play buttons, update game status messages, load images based on user selections, and display results.  Firebase is used for data persistance related to player information, game data, and messaging. Firebase is also used to monitor connections so that when a player disconnects, a message is posted indicating the player has disconnected.  The game has been optimized for playing on tablets and phones in both portrait and landscape mode.

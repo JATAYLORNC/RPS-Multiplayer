@@ -18,37 +18,28 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 d-flex justify-content-center align-items-center" id="title-bar">
-                <h1 id="title">Rock Paper Scissors</h1>
-            </div>
-        </div>
-        <div class="row" id = "row1">
-            <div class="col-sm-4"></div>
-                <div class="col-sm-4 d-flex justify-content-center align-items-center" id="player">
-                    <form class="input-group mt-4" id="addPlayer">
-                        <input type="text" class="form-control" id="userNameInput" placeholder="Name" aria-label="Users First Name">
-                        <button type="submit" class="btn btn:hover ml-1" id="start" value="Start">Start</button>
-                    </form>
+        <div id="gameComs">
+            <div class="row">
+                <div class="col-sm-12 d-flex justify-content-center align-items-center" id="title-bar">
+                    <h1 id="title">Rock Paper Scissors</h1>
                 </div>
-            <div class="col-sm-4"></div>
-        </div>
-        <div class="row">
-
-            <div class="col-sm-12 d-flex justify-content-center align-items-center">
-                <h5 class="mt-4" id="userName"></h5>
-            </div>   
-            <div class="col-sm-12 d-flex justify-content-center align-items-center">
-                <h5 class="mt-2 mb-4" id="gameStatus"></h5>
+            </div>
+            <div class="row" id = "row1">
+                <div class="col-sm-4"></div>
+                    <div class="col-sm-4 d-flex justify-content-center align-items-center" id="player">
+                        <form class="input-group mt-4 mb-4" id="addPlayer">
+                            <input type="text" class="form-control" id="userNameInput" placeholder="Name" aria-label="Users First Name">
+                            <button type="submit" class="btn btn:hover ml-1" id="start" value="Start">Start</button>
+                        </form>
+                    </div>
+                <div class="col-sm-4"></div>
             </div>
         </div>
         <div class="row">
-
-
                 <div class="col-sm-4 d-flex justify-content-center">
                     <div class="card text-center mt-1 mb-2" id="player1Card">
                         <div class="card-header p-0">
-                            <h5 class="card-header userName w-100" id="player1">Waiting for Player 1</h5>
+                            <h5 class="card-header userName" id="player1">Waiting for Player 1</h5>
                         </div>
                         <div class="card-body p-0" id="p1Display">
                             <div id="player1Choice"></div>
@@ -64,7 +55,7 @@
                 <div class="col-sm-4 d-flex justify-content-center">
                     <div class="card text-center mt-1 mb-2" id="player2Card">
                         <div class="card-header p-0">
-                            <h5 class="card-header userName w-100" id="player2">Waiting for Player 2</h5>
+                            <h5 class="card-header userName" id="player2">Waiting for Player 2</h5>
                         </div>
                         <div class="card-body p-0" id="p2Display">
                             <div id="player2Choice"></div>
