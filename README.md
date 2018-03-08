@@ -5,5 +5,5 @@ Once there are 2 players, the game will indicate that it is the first players tu
 
 A messaging feature is also included with this game so players can communicate with one another or taunt each other while playing the game.
 
-#About
+## About
 Rock/Paper/Scissors is coded in Javascript along with jQuery commands to add and remove game-play buttons, update game status messages, load images based on user selections, and display results.  Firebase is used for data persistance related to player information, game data, and messaging. Firebase is also used to monitor connections so that when a player disconnects, a message is posted indicating the player has disconnected.  The game has been optimized for playing on tablets and phones in both portrait and landscape mode.

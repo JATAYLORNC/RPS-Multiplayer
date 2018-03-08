@@ -77,7 +77,15 @@
     color: #8E0804;
 }
 
+.message {
+    margin: 0 1rem;
+}
+
 @media screen and (min-width: 576px) and (max-width: 767px) {
+
+    #player, #status {
+        height: 80px;
+    }
 
     #title-bar {
         height: 48px;
@@ -127,6 +135,6 @@
     .userName {
         font-size: 1rem;
         height: 40px;
+    }
     
 }
-
