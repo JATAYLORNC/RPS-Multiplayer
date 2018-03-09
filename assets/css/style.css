@@ -81,7 +81,7 @@
     margin: 0 1rem;
 }
 
-@media screen and (max-width: 575px) {
+/* @media screen and (max-width: 575px) {
 
     #player, #status {
         height: 60px;
@@ -118,7 +118,7 @@
         height: 33px;
     }
     
-}
+} */
 
 @media screen and (min-width: 576px) and (max-width: 767px) {
 

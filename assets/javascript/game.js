@@ -471,7 +471,7 @@ displayResults = function(myplayerData) {
         $("#resultsCard").append("<h1 id='winner'>" + player2Name + "</h1><h1>Wins!</h1>");
 
     } else if (player1Choice == player2Choice) {
-        $("#resultsCard").append("<h1 id='winner'>Tie Game!</h1>");
+        $("#resultsCard").append("<h1 class='align-items-center' id='winner'>Tie Game!</h1>");
     }
 
     $("#p1WL").text("wins: " + player1Wins + "  losses: " + player1Losses);
