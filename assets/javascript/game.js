@@ -428,7 +428,7 @@ displayResults = function(myplayerData) {
         player2Losses++;
         playersRef.child("1/wins").set(player1Wins);
         playersRef.child("2/losses").set(player2Losses);
-        $("#resultsCard").append("<h1>" + player1Name + "</h1><h1>Wins!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>" + player1Name + "</h1><h1>Wins!</h1>");
 
     } else if ((player1Choice === "Rock") && (player2Choice === "Paper")) {
 
@@ -436,7 +436,7 @@ displayResults = function(myplayerData) {
         player2Wins++;
         playersRef.child("1/losses").set(player1Losses);
         playersRef.child("2/wins").set(player2Wins);
-        $("#resultsCard").append("<h1>" + player2Name + "</h1><h1>Wins!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>" + player2Name + "</h1><h1>Wins!</h1>");
 
     } else if ((player1Choice === "Scissors") && (player2Choice === "Rock")) {
 
@@ -444,7 +444,7 @@ displayResults = function(myplayerData) {
         player2Wins++;
         playersRef.child("1/losses").set(player1Losses);
         playersRef.child("2/wins").set(player2Wins);
-        $("#resultsCard").append("<h1>" + player2Name + "</h1><h1>Wins!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>" + player2Name + "</h1><h1>Wins!</h1>");
 
     } else if ((player1Choice === "Scissors") && (player2Choice === "Paper")) {
         
@@ -452,7 +452,7 @@ displayResults = function(myplayerData) {
         player2Losses++;
         playersRef.child("1/wins").set(player1Wins);
         playersRef.child("2/losses").set(player2Losses);
-        $("#resultsCard").append("<h1>" + player1Name + "</h1><h1>Wins!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>" + player1Name + "</h1><h1>Wins!</h1>");
 
     } else if ((player1Choice === "Paper") && (player2Choice === "Rock")) {
 
@@ -460,7 +460,7 @@ displayResults = function(myplayerData) {
         player2Losses++;
         playersRef.child("1/wins").set(player1Wins);
         playersRef.child("2/losses").set(player2Losses);
-        $("#resultsCard").append("<h1>" + player1Name + "</h1><h1>Wins!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>" + player1Name + "</h1><h1>Wins!</h1>");
 
     } else if ((player1Choice === "Paper") && (player2Choice === "Scissors")) {
 
@@ -468,10 +468,10 @@ displayResults = function(myplayerData) {
         player2Wins++;
         playersRef.child("1/losses").set(player1Losses);
         playersRef.child("2/wins").set(player2Wins);
-        $("#resultsCard").append("<h1>" + player2Name + "</h1><h1>Wins!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>" + player2Name + "</h1><h1>Wins!</h1>");
 
     } else if (player1Choice == player2Choice) {
-        $("#resultsCard").append("<h1>Tie Game!</h1>");
+        $("#resultsCard").append("<h1 id='winner'>Tie Game!</h1>");
     }
 
     $("#p1WL").text("wins: " + player1Wins + "  losses: " + player1Losses);

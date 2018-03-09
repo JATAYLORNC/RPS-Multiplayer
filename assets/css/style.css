@@ -81,7 +81,50 @@
     margin: 0 1rem;
 }
 
+@media screen and (max-width: 575px) {
+
+    #player, #status {
+        height: 60px;
+    }
+
+    #winner {
+        font-size: 1.5rem;
+    }
+
+    #title-bar {
+        height: 36px;
+    }
+
+    #title {
+        font-size: 1.5rem;
+    }
+    
+    #player1Card, #player2Card, #resultsCard {
+        max-height: 160px;
+    }
+
+    .rpsText {
+        font-size: 1rem;
+        height: 32px;
+    }
+
+    #p1WL, #p2WL {
+        font-size: 0.4rem;
+        height: 20px;
+    }
+
+    .userName {
+        font-size: 0.75rem;
+        height: 33px;
+    }
+    
+}
+
 @media screen and (min-width: 576px) and (max-width: 767px) {
+
+    #winner {
+        font-size: 1.5rem;
+    }
 
     #player, #status {
         height: 80px;
